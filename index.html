@@ -48,12 +48,27 @@
 			container.appendChild(subjectDiv);
 
 			var bodyDiv = document.createElement('div');
-			bodyDiv.id = 'body';
+			bodyDiv.className = 'body';
 			bodyDiv.innerHTML = body;
 			container.appendChild(bodyDiv);
 
-        }
+			var containerElem = document.getElementsByClassName('container');
+			for(var j = 0; j < containerElem.length; j++){
+				containerElem[j].addEventListener('click', display);
+			}
+
+			function display(message){
+				var displayBody = this.querySelectorAll('.body')[0];
+				if(displayBody.classList.contains('show')=== false){
+					displayBody.classList.add('show');
+				}
+				else{
+					displayBody.classList.remove('show');
+				}
+			}	
+        } 
       };
+
     </script>
 
 </head>

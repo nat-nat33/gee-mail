@@ -4,3 +4,11 @@ h1 {
 	line-height: 300%;
 	font-family: "georgia";
 }
+
+.body {
+	display: none;
+}
+
+.body.show {
+	display: inline;
+}
