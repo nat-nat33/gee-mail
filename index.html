@@ -13,17 +13,17 @@
         //var count =	document.getElementId("count");
         //count.innerHTML = "You have"+ windows.geemails.length +"messages.";
 
-
-
         //displaying the messages
+
+        function getMessage(message){ 
         for (var i = 0; i< window.geemails.length; i++) {
         	//var container = document.getElementId("main"); ?? guess I didn't need this either, maybe later
  
         	//var newMsg = windows.geemails[i]; not necessary, oopsie.
-        	var date = geemails[i].date;
-        	var sender = geemails[i].sender;
-        	var subject = geemails[i].subject;
-        	var body = geemails[i].body;
+        	var date = message[i].date;
+        	var sender = message[i].sender;
+        	var subject = message[i].subject;
+        	var body = message[i].body;
 
 			//var divRow = document.createElement ('div');
 			//container.appendChild(divRow); don't know what I was thinking!
@@ -57,7 +57,7 @@
 				containerElem[j].addEventListener('click', display);
 			}
 
-			function display(message){
+			function display(handler){
 				var displayBody = this.querySelectorAll('.body')[0];
 				if(displayBody.classList.contains('show')=== false){
 					displayBody.classList.add('show');
@@ -67,7 +67,9 @@
 				}
 			}	
         } 
-      };
+      }
+      getMessage(geemails);
+  };
 
     </script>
 
