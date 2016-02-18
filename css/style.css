@@ -1,14 +1,38 @@
+body {
+	background-image: url(/images/swirl_pattern1.jpg);
+}
+
 h1 {
 	font-size: 300%;
 	text-align: center;
 	line-height: 300%;
 	font-family: "georgia";
+	background-color: #9494b8;
+	opacity: .8;
+}
+
+.container{
+	font-family: "georgia";
+	background-color: #9494b8;
+	opacity: .8;
+	border-style: outset;
+}
+
+#date{
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+#subject:hover {
+	color: blue;
+	text-decoration: underline;
 }
 
 .body {
 	display: none;
+	background-color: #b3b3cb;
 }
 
-.body.show {
+.body.display {
 	display: inline;
 }

@@ -8,13 +8,8 @@
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
 
-      	//setInterval(getNewMessage(), 3000); 
-
-        //var count =	document.getElementId("count");
-        //count.innerHTML = "You have"+ windows.geemails.length +"messages.";
 
         //displaying the messages
-
         function getMessage(message){ 
         for (var i = 0; i< window.geemails.length; i++) {
         	//var container = document.getElementId("main"); ?? guess I didn't need this either, maybe later
@@ -52,6 +47,8 @@
 			bodyDiv.innerHTML = body;
 			container.appendChild(bodyDiv);
 
+
+            //adding the clicky thingy to show msg
 			var containerElem = document.getElementsByClassName('container');
 			for(var j = 0; j < containerElem.length; j++){
 				containerElem[j].addEventListener('click', display);
@@ -59,27 +56,40 @@
 
 			function display(handler){
 				var displayBody = this.querySelectorAll('.body')[0];
-				if(displayBody.classList.contains('show')=== false){
-					displayBody.classList.add('show');
+				if(displayBody.classList.contains('display')=== false){
+					displayBody.classList.add('display');
 				}
 				else{
-					displayBody.classList.remove('show');
+					displayBody.classList.remove('display');
 				}
 			}	
         } 
       }
       getMessage(geemails);
+
+
+        var count =	document.getElementById('msgCount');
+        var msgCount = geemails.length;
+       	var totalCount= document.createTextNode(msgCount);
+        count.appendChild(totalCount);
+
+        function createNewMsg(){
+        setInterval(getNewMessage(), 5000); 
+       } 
+       createNewMsg(loadGeeMails);
   };
 
-    </script>
+	</script>
 
 </head>
 	<body>
 		<div id = "header">
-		<h1>Gee-Mail</h1>
+		<h1>Gee-Mail
+		<img src= "/images/flying_envelope_2.gif" alt="floatie" style= "float:right">
+		</h1>
 			<div id = "messages">
 				<h2>Inbox</h2>
-				<div id = "count"></div>
+				<div id = "count">You have <span id = "msgCount"></span> messages.</div>
 			</div>     
 		</div>
 		<div id="main"></div>
