@@ -9,19 +9,15 @@
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
 
 
-        //displaying the messages
+        //displaying the initial messages
         function getMessage(message){ 
         for (var i = 0; i< window.geemails.length; i++) {
-        	//var container = document.getElementId("main"); ?? guess I didn't need this either, maybe later
- 
-        	//var newMsg = windows.geemails[i]; not necessary, oopsie.
+
         	var date = message[i].date;
         	var sender = message[i].sender;
         	var subject = message[i].subject;
         	var body = message[i].body;
 
-			//var divRow = document.createElement ('div');
-			//container.appendChild(divRow); don't know what I was thinking!
 
 			var container = document.createElement('div');
 			container.className = 'container';
@@ -45,10 +41,63 @@
 			var bodyDiv = document.createElement('div');
 			bodyDiv.className = 'body';
 			bodyDiv.innerHTML = body;
+			container.appendChild(bodyDiv); 
+
+
+            //adding the event to show msg body
+			var containerElem = document.getElementsByClassName('container');
+			for(var j = 0; j < containerElem.length; j++){
+				containerElem[j].addEventListener('click', display);
+			}
+
+			function display(handler){
+				var displayBody = this.querySelectorAll('.body')[0];
+				if(displayBody.classList.contains('display')=== false){
+				displayBody.classList.add('display');
+				} 
+				else{
+					displayBody.classList.remove('display');
+				}
+			}	
+        } 
+      }
+      getMessage(geemails);//calling function to load initial messages.
+
+      	//adding email count
+        	var count =	document.getElementById('msgCount');
+        	var msgCount = geemails.length;
+       		var totalCount= document.createTextNode(msgCount);
+        	count.appendChild(totalCount);
+
+        //interval to add new messages
+     	setInterval(function (){
+     		var moreMsgs = getNewMessage();
+     		geemails.push(moreMsgs);
+
+     		var container = document.createElement('div');
+			container.className = 'container';
+			document.getElementById('main').appendChild(container);
+
+			var dateDiv = document.createElement('div');
+			dateDiv.id  = 'date';
+			dateDiv.innerHTML = moreMsgs.date;
+			container.appendChild(dateDiv);
+
+			var senderDiv = document.createElement('div');
+			senderDiv.id = 'sender';
+			senderDiv.innerHTML = moreMsgs.sender;
+			container.appendChild(senderDiv);
+
+			var subjectDiv = document.createElement('div');
+			subjectDiv.id = 'subject';
+			subjectDiv.innerHTML = moreMsgs.subject;
+			container.appendChild(subjectDiv);
+
+			var bodyDiv = document.createElement('div');
+			bodyDiv.className = 'body';
+			bodyDiv.innerHTML = moreMsgs.body;
 			container.appendChild(bodyDiv);
 
-
-            //adding the clicky thingy to show msg
 			var containerElem = document.getElementsByClassName('container');
 			for(var j = 0; j < containerElem.length; j++){
 				containerElem[j].addEventListener('click', display);
@@ -62,31 +111,20 @@
 				else{
 					displayBody.classList.remove('display');
 				}
-			}	
-        } 
-      }
-      getMessage(geemails);
+     		}
+     		msgCount ++;
+     		count.innerHTML= msgCount;
 
+     	alert("YoU GotS MaiL Yo!"); },  10000);//end of adding additional messages
 
-        var count =	document.getElementById('msgCount');
-        var msgCount = geemails.length;
-       	var totalCount= document.createTextNode(msgCount);
-        count.appendChild(totalCount);
-
-        function createNewMsg(){
-        setInterval(getNewMessage(), 5000); 
-       } 
-       createNewMsg(loadGeeMails);
-  };
+};
 
 	</script>
 
 </head>
 	<body>
 		<div id = "header">
-		<h1>Gee-Mail
-		<img src= "/images/flying_envelope_2.gif" alt="floatie" style= "float:right">
-		</h1>
+		<h1>Gee-Mail</h1>
 			<div id = "messages">
 				<h2>Inbox</h2>
 				<div id = "count">You have <span id = "msgCount"></span> messages.</div>
